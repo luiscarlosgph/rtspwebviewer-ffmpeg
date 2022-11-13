@@ -42,7 +42,7 @@ RUN /bin/zsh -c "source $HOME/.zshrc && pyenv global $PYTHON_VERSION"
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ffmpeg
 
 # Install rtspwebviewer-ffmpeg
-#RUN /bin/zsh -c "source $HOME/.zshrc && python -m pip install rtspwebviewer"
+RUN /bin/zsh -c "source $HOME/.zshrc && python -m pip install rtspwebviewer-ffmpeg"
 
 # Start services and run the user-specified command
 ADD files/entrypoint.sh /opt/entrypoint.sh
