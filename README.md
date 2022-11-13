@@ -13,7 +13,7 @@ This section explains how to use this repository with Docker.
    ```bash
    $ git clone https://github.com/luiscarlosgph/rtspwebviewer-ffmpeg.git
    $ cd rtspwebviewer-ffmpeg/docker
-   $ docker build -t .
+   $ docker build -t rtspwebviewer-ffmpeg .
    ```
 
 2. Launch Docker container:
