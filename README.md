@@ -45,8 +45,14 @@ This sections explains how to use this repository without Docker, as a standalon
 
 3. Run the web server:
    ```bash
-   $ python -m rtspwebviewer_ffmpeg.run --m3u8 <path_to_m3u8_file>
+   $ python -m rtspwebviewer_ffmpeg.run --address <listening_ip_address> --port <port> --title <web_title> --password <url_based_password> --m3u8 <path_to_m3u8_file>
    ```
+
+   Options:
+      * `--address`: Listening address, use `0.0.0.0` to listen in all interfaces.
+      * `--port`: TCP port to listen on.
+      * `--title`: website title.
+      * `--password`: password to append to the URL of the web server to access the web player.
 
 Author
 ------
