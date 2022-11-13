@@ -71,6 +71,7 @@ def main():
 
     # Create a link to the m3u8 file in the static folder
     file_path = os.path.realpath(__file__)
+    print("File path: {}".format(file_path))
     
     # Start the flask app
     app.run(host=args.address, port=args.port, debug=False, threaded=True, use_reloader=False)
