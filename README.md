@@ -33,7 +33,9 @@ This sections explains how to use this repository without Docker, as a standalon
    
 2. Install `rtspwebviewer-ffmpeg`:
    ```bash
-   $ git clone 
+   $ git clone https://github.com/luiscarlosgph/rtspwebviewer-ffmpeg.git
+   $ cd rtspwebviewer-ffmpeg
+   $ python3 setup.py install
    ```
 
 2. Run `ffmpeg` to convert the [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol) stream into  [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming):
@@ -44,7 +46,7 @@ This sections explains how to use this repository without Docker, as a standalon
 
 3. Run the web server:
    ```bash
-   $ TODO
+   $ python -m rtspwebviewer-ffmpeg.run --m3u8 <path_to_m3u8_file>
    ```
 
 Author
