@@ -4,16 +4,20 @@ Description
 Web server that displays an RTSP video stream using ffmpeg as backend.
 
 
-Build Docker container
-----------------------
+Use as a Docker container
+-------------------------
 
-TODO
+1. Build Docker container: 
 
+   ```bash
+   $ TODO
+   ```
 
-Launch Docker container
------------------------
+2. Launch Docker container:
 
-TODO
+   ```bash
+   $ TODO
+   ```
 
 
 Author
