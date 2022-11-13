@@ -85,12 +85,12 @@ def main():
         os.unlink(streaming_path)
     os.symlink(args.m3u8, streaming_path)
 
-    # Create soft link for the m3u8 files
+    # Create soft link for the ts files
     src_m3u8_path_no_ext, _ = os.path.splitext(args.m3u8)  
     dst_m3u8_path_no_ext, _ = os.path.splitext(streaming_path)
     for i in range(args.ts):
-        src_link = src_m3u8_path_no_ext + str(i) + '.ts'
-        dst_link = dst_m3u8_path_no_ext + str(i) + '.ts'
+        src_link = "{}{}.ts".format(src_m3u8_path_no_ext, i)
+        dst_link = "{}{}.ts".format(dst_m3u8_path_no_ext, i) 
         if os.path.islink(dst_link):
             os.unlink(dst_link)
         os.symlink(src_link, dst_link)
