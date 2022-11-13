@@ -19,13 +19,14 @@ This section explains how to use this repository with Docker.
 2. Launch Docker container:
 
    ```bash
-   $ docker run --name rtspwebviewer-ffmpeg --net=host rtspwebviewer-ffmpeg:latest --e RTSP=<rtsp_stream_address> -e PORT=<port> -e WEB_TITLE=<web_title> -e WEB_PWD=<password>
+   $ docker run --name rtspwebviewer-ffmpeg --net=host rtspwebviewer-ffmpeg:latest -e RTSP=<rtsp_stream_address> -e PORT=<port> -e WEB_TITLE=<web_title> -e WEB_PWD=<password>
    ```
+   
    Options:
-      `RTSP`: RTSP stream address.
-      `PORT`: listening port for the web server that will play the camera video.
-      `WEB_TITLE`: the name of the website that will be displayed by your web browser.
-      `WEB_PWD`: the URL-based password to access the web player.
+      * `RTSP`: RTSP stream address.
+      * `PORT`: listening port for the web server that will play the camera video.
+      * `WEB_TITLE`: the name of the website that will be displayed by your web browser.
+      * `WEB_PWD`: the URL-based password to access the web player.
 
 3. Access the web player: `http://127.0.0.1:<port>/<password>`.
 
