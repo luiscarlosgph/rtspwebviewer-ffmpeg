@@ -46,7 +46,7 @@ This sections explains how to use this repository without Docker, as a standalon
 
 3. Run the web server:
    ```bash
-   $ python -m rtspwebviewer-ffmpeg.run --m3u8 <path_to_m3u8_file>
+   $ python -m rtspwebviewer_ffmpeg.run --m3u8 <path_to_m3u8_file>
    ```
 
 Author
