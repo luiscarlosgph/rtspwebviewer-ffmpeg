@@ -3,6 +3,8 @@ Description
 
 Web server that displays an RTSP video stream using ffmpeg as backend.
 
+Sound is not supported.
+
 Use as a Docker container
 -------------------------
 
