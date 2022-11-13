@@ -7,10 +7,6 @@
 """
 
 import argparse
-import cv2
-import threading
-import time
-import imutils
 import flask
 import os
 
