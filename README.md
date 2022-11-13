@@ -21,7 +21,7 @@ This section explains how to use this repository with Docker.
 2. Launch Docker container:
 
    ```bash
-   $ docker run --name rtspwebviewer-ffmpeg --net=host rtspwebviewer-ffmpeg:latest -e RTSP=<rtsp_stream_address> -e PORT=<port> -e WEB_TITLE=<web_title> -e WEB_PWD=<password>
+   $ docker run --name rtspwebviewer-ffmpeg --net=host -e RTSP=<rtsp_stream_address> -e PORT=<port> -e WEB_TITLE=<web_title> -e WEB_PWD=<password> rtspwebviewer-ffmpeg:latest &
    ```
    
    Options:
