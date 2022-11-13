@@ -30,10 +30,16 @@ This sections explains how to use this repository without Docker, as a standalon
    $ sudo apt update
    $ sudo apt install ffmpeg
    ```
+   
+2. Install `rtspwebviewer-ffmpeg`:
+   ```bash
+   $ git clone 
+   ```
 
 2. Run `ffmpeg` to convert the [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol) stream into  [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming):
    ```bash
-   $ TODO
+   $ ffmpeg -fflags nobuffer -rtsp_transport tcp -i <rtsp_stream_address> -c copy -hls_time 2 -hls_wrap 10 <path_to_m3u8_file>
+   $ python -m 
    ```
 
 3. Run the web server:
