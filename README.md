@@ -29,4 +29,4 @@ Luis C. Garcia-Peraza Herrera (luiscarlos.gph@gmail.com).
 License
 -------
 
-TODO
+This repository is shared under an [MIT License](https://github.com/luiscarlosgph/rtspwebviewer-ffmpeg/blob/main/LICENSE).
