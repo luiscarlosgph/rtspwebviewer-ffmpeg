@@ -19,7 +19,7 @@ This section explains how to use this repository with Docker.
 2. Launch Docker container:
 
    ```bash
-   $ TODO
+   $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
    ```
    
 Use as a standalone program
