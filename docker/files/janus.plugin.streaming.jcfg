@@ -1,0 +1,15 @@
+reolink-rtp: {
+    type = "rtp"
+    id = 999
+    description = ""
+    audio = true
+    audioport = 5051
+    audiopt = 111
+    audiortpmap = "opus/48000/2"    
+    video = true
+    videoport = 5052
+    videopt = 96
+    videortpmap = "H264/90000"
+    videofmtp = "profile-level-id=42e028;packetization-mode=1"
+    #videofmtp = "profile-level-id=420032;packetization-mode=1"
+}

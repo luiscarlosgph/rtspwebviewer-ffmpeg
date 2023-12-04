@@ -41,8 +41,58 @@ RUN /bin/zsh -c "source $HOME/.zshrc && pyenv global $PYTHON_VERSION"
 # Install ffmpeg
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ffmpeg
 
+# Install WebRTC dependencies
+RUN DEBIAN_FRONTEND=noninteractive apt install -y libmicrohttpd-dev libjansson-dev libssl-dev libsofia-sip-ua-dev libglib2.0-dev libopus-dev libogg-dev libcurl4-openssl-dev liblua5.3-dev libconfig-dev pkg-config libtool automake meson ninja-build
+
+# Install libnice 
+ENV LIBNICE_VERSION="0.1.21"
+RUN cd /usr/local/src && git clone https://github.com/libnice/libnice.git
+RUN cd /usr/local/src/libnice && git checkout tags/$LIBNICE_VERSION
+RUN cd /usr/local/src/libnice && meson --prefix=/usr build
+RUN cd /usr/local/src/libnice && ninja -C build
+RUN cd /usr/local/src/libnice && ninja -C build install
+
+# Install libsrtp
+ENV LIBSRTP_VERSION="v2.2.0"
+RUN cd /usr/local/src && wget https://github.com/cisco/libsrtp/archive/$LIBSRTP_VERSION.tar.gz
+RUN cd /usr/local/src && tar -xzf $LIBSRTP_VERSION.tar.gz
+RUN cd /usr/local/src && rm -rf $LIBSRTP_VERSION.tar.gz
+RUN cd /usr/local/src && mv libsrtp-* libsrtp
+RUN cd /usr/local/src/libsrtp && ./configure --prefix=/usr --enable-openssl
+RUN cd /usr/local/src/libsrtp && make shared_library && make install
+
+# Install usrsctp
+ENV USRSCTP_VERSION="0.9.5.0"
+RUN cd /usr/local/src && git clone https://github.com/sctplab/usrsctp.git
+RUN cd /usr/local/src/usrsctp && git checkout tags/$USRSCTP_VERSION
+RUN cd /usr/local/src/usrsctp && ./bootstrap 
+RUN cd /usr/local/src/usrsctp && ./configure --prefix=/usr --disable-programs --disable-inet --disable-inet6
+RUN cd /usr/local/src/usrsctp && make && make install
+
+# Install libwebsockets
+ENV LIBWEBSOCKETS_VERSION="v4.3.2"
+RUN cd /usr/local/src && git clone https://libwebsockets.org/repo/libwebsockets
+RUN cd /usr/local/src/libwebsockets && git checkout tags/$LIBWEBSOCKETS_VERSION
+RUN cd /usr/local/src/libwebsockets && mkdir build
+RUN cd /usr/local/src/libwebsockets/build && cmake -DLWS_MAX_SMP=1 -DLWS_WITHOUT_EXTENSIONS=0 -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_C_FLAGS="-fpic" ..
+RUN cd /usr/local/src/libwebsockets/build && make && make install
+
+# Install Janus Gateway
+ENV JANUS_GATEWAY_VERSION="v1.1.3"
+RUN cd /usr/local/src && git clone https://github.com/meetecho/janus-gateway.git
+RUN cd /usr/local/src/janus-gateway && git checkout tags/$JANUS_GATEWAY_VERSION
+RUN cd /usr/local/src/janus-gateway && ./autogen.sh
+RUN cd /usr/local/src/janus-gateway && ./configure --prefix=/opt/janus
+RUN cd /usr/local/src/janus-gateway && make && make install && make configs
+RUN mkdir -p /app/backend/webrtc-server
+RUN cd /app/backend/webrtc-server && ln -s /opt/janus/bin .
+RUN cd /app/backend/webrtc-server && ln -s /opt/janus/etc/janus configs
+RUN rm /app/backend/webrtc-server/configs/janus.plugin.streaming.jcfg
+ADD files/janus.plugin.streaming.jcfg /app/backend/webrtc-server/configs/janus.plugin.streaming.jcfg
+
 # Install rtspwebviewer-ffmpeg
-RUN /bin/zsh -c "source $HOME/.zshrc && python -m pip install rtspwebviewer_ffmpeg"
+RUN cd /opt && git clone https://github.com/luiscarlosgph/rtspwebviewer-ffmpeg.git
+RUN /bin/zsh -c "source $HOME/.zshrc && cd /opt/rtspwebviewer-ffmpeg && python3 setup.py install"
 
 # Start services and run the user-specified command
 ADD files/entrypoint.sh /opt/entrypoint.sh
