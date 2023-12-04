@@ -1,1 +1,4 @@
 include src/templates/index.html
+include src/static/css/frontend.css
+include src/static/js/frontend.js
+include src/static/js/janus.js
