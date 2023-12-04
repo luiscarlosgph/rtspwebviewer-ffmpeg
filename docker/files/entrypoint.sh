@@ -4,7 +4,7 @@
 source $USER/.zshrc
 
 # Run ffmpeg to convert the RTSP stream into RTP
-ffmpeg -i $RTSP -an -c:v copy -flags global_header -bsf dump_extra -f rtp rtp://localhost:5052 -vn -codec:a libopus -f rtp rtp://localhost:5051 > /dev/null 2>&1 &
+ffmpeg -rtsp_transport tcp -i $RTSP -an -c:v copy -flags global_header -bsf dump_extra -f rtp rtp://localhost:5052 -vn -codec:a libopus -f rtp rtp://localhost:5051 > /dev/null 2>&1 &
 
 # Run Janus Gateway
 /app/backend/webrtc-server/bin/janus > /dev/null 2>&1 &
