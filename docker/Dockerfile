@@ -90,6 +90,9 @@ RUN cd /app/backend/webrtc-server && ln -s /opt/janus/etc/janus configs
 RUN rm /app/backend/webrtc-server/configs/janus.plugin.streaming.jcfg
 ADD files/janus.plugin.streaming.jcfg /app/backend/webrtc-server/configs/janus.plugin.streaming.jcfg
 
+# Install nginx
+RUN DEBIAN_FRONTEND=noninteractive apt install -y nginx
+
 # Install rtspwebviewer-ffmpeg
 RUN cd /opt && git clone https://github.com/luiscarlosgph/rtspwebviewer-ffmpeg.git
 RUN /bin/zsh -c "source $HOME/.zshrc && cd /opt/rtspwebviewer-ffmpeg && python3 setup.py install"
